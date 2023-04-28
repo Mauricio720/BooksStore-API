@@ -1,12 +1,11 @@
-.container{
+.container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     padding: 15px;
 }
 
-
-.actionBtn{
+.actionBtn {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -14,18 +13,21 @@
     right: 0px;
 }
 
-.actionBtn__delete{
+.actionBtn__delete {
     right: 15px;
 }
 
-.book{
-    width: 20px;
-    height: 20px;
+.book {
+    width: 210px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
-.bookImage,.bookImage__exibition{
-    width: 140px;
-    height: 140px;
+.bookImage,
+.bookImage__exibition {
     border: 1px solid #ccc;
     border-radius: 15px;
     margin: 5px;
@@ -33,22 +35,26 @@
     display: flex;
     justify-content: center;
     padding: 5px;
+    width: 140px;
+    height: 140px;
 }
 
-.bookImage__exibition{
+.bookImage__exibition {
     margin-top: 10px;
 }
 
-.bookImage img, .bookImage__exibition img{
+.bookImage img,
+.bookImage__exibition img {
     max-height: 120px;
     object-fit: contain;
 }
 
-.bookImage:hover{
+.bookImage:hover {
     background-color: #ccc;
 }
 
-.bookTitle, .bookAuthor{
+.bookTitle,
+.bookAuthor {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
@@ -56,18 +62,18 @@
     color: black;
 }
 
-.bookAuthor{
+.bookAuthor {
     font-size: 16px;
     font-weight: normal;
 }
 
-.bookPrice{
+.bookPrice {
     text-align: center;
     font-size: 16px;
     color: black;
 }
 
-.bookDescription{
+.bookDescription {
     text-align: center;
     font-size: 14px;
     color: black;
@@ -75,7 +81,7 @@
     border-bottom: 1px solid #ccc;
 }
 
-.addButton{
+.addButton {
     position: absolute;
     top: 0px;
     right: 0px;
