@@ -1,0 +1,82 @@
+.container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+
+.actionBtn{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+
+.actionBtn__delete{
+    right: 15px;
+}
+
+.book{
+    width: 20px;
+    height: 20px;
+}
+
+.bookImage,.bookImage__exibition{
+    width: 140px;
+    height: 140px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.bookImage__exibition{
+    margin-top: 10px;
+}
+
+.bookImage img, .bookImage__exibition img{
+    max-height: 120px;
+    object-fit: contain;
+}
+
+.bookImage:hover{
+    background-color: #ccc;
+}
+
+.bookTitle, .bookAuthor{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    color: black;
+}
+
+.bookAuthor{
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.bookPrice{
+    text-align: center;
+    font-size: 16px;
+    color: black;
+}
+
+.bookDescription{
+    text-align: center;
+    font-size: 14px;
+    color: black;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.addButton{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
