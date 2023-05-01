@@ -16,6 +16,59 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
+       /**
+     * @OA\POST(
+     *      path="/login",
+     *      summary="LOGIN",
+     *      description="Rota para realização de login 
+     *      (Login de teste email:alexane94@example.com; senha:password)",
+     *      tags={"Login"},
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="Email para login",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     * 
+     *      @OA\Parameter(
+     *          name="password",
+     *          description="Senha para login",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     * 
+     *     
+     *      @OA\Response(
+     *          response=202,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request",
+     *          
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
+
     public function login(AuthRequest $request)
     {
         $credentials = $request->only('email', 'password');
