@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
-use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Address;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -106,7 +105,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
         return response()->json([
             'status' => 'success',
             'user' => $user,
@@ -116,12 +115,12 @@ class AuthController extends Controller
 
      /**
      * @OA\POST(
-     *      path="/register",
+     *      path="/user",
      *      summary="REGISTRO USUÁRIO",
      *      description="Rota para registro do usuário",
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/UserRegisterRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/UserRequest")
      *      ),
      *      tags={"Autenticação"},
      *      @OA\Response(
@@ -149,7 +148,7 @@ class AuthController extends Controller
      * )
      */
 
-    public function register(UserRegisterRequest $request){
+    public function register(UserRequest $request){
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,12 @@ Route::get('/books/{search?}', [App\Http\Controllers\Api\BookController::class, 
 Route::controller(AuthController::class)->group(function () {
   Route::post('logged', 'logged');
   Route::post('login', 'login');
-  Route::post('register', 'register');
+  Route::post('user', 'register');
   Route::post('logout', 'logout');
   Route::post('refresh', 'refresh');
+});
+
+
+Route::controller(UserController::class)->group(function () {
+  Route::put('user', 'update');
 });

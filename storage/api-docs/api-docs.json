@@ -98,20 +98,65 @@
                 }
             }
         },
-        "/register": {
+        "/user": {
+            "put": {
+                "tags": [
+                    "USUÁRIOS"
+                ],
+                "summary": "ATUALIZAÇÃO USUÁRIO",
+                "description": "Rota para atualizar do usuário",
+                "operationId": "6069c00eaab3a7ff0c44e75d385cc2f1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Autenticação"
                 ],
                 "summary": "REGISTRO USUÁRIO",
                 "description": "Rota para registro do usuário",
-                "operationId": "5d4fa5d5607ed675ba93907e1fc94534",
+                "operationId": "88f8ef1c72fbda4344f742bd01a197a8",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserRegisterRequest"
+                                "$ref": "#/components/schemas/UserRequest"
                             }
                         }
                     }
@@ -206,7 +251,7 @@
                 },
                 "type": "object"
             },
-            "UserRegisterRequest": {
+            "UserRequest": {
                 "title": "Auth Register Request",
                 "description": "Auth request body data",
                 "required": [

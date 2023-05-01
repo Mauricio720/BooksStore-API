@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,15 @@ class UserController extends Controller
     }
 
     public function updateUser(Request $request){
-        $user=User::where('id',Auth::user()->id)->first();
-        $data=$request->only(['name','email','password']);
+        $user=User::where('id',Auth::guard('api')->user()->id)->first();
         
-        $user->name=$request->filled('name')?$data['name']:$user->name;
-        $user->email=$request->filled('email')?$data['email']:$user->name;
-        $user->password=$request->filled('password')?Hash::make($data['password']):$user->password;
+        $user->name=$request->filled('name')?$request->input('name'):$user->name;
+        $user->email=$request->filled('email')?$request->input('email'):$user->email;
+        $user->password=$request->filled('password')
+            ?
+            Hash::make($request->input('password'))
+            :
+            $user->password;
         $user->save();
 
         return redirect()->route('myProfile');

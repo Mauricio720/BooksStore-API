@@ -2,9 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+
 
 /**
  * @OA\Schema(
@@ -17,7 +21,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
  */
 
 
-class UserRegisterRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     
     /**
@@ -141,16 +145,22 @@ class UserRegisterRequest extends FormRequest
      */
     public function rules()
     {
+        $verboHttp = $this->getMethod();
+        $requiredRule='required';
+        if ($verboHttp == 'PUT') {
+            $requiredRule="";
+        }
+     
         return [
             'name'=>['string'],
-            'email' => ['email','unique:users', 'required'],
-            'password' => ['string', 'required'],
-            'street' =>  ['string', 'required'],
-            'number' =>  ['string', 'required'],
-            'neighborhood' =>  ['string', 'required'],
-            'city' =>  ['string', 'required'],
-            'cep' =>  ['string','formato_cep', 'required'],
-            'state' =>  ['string', 'required'],
+            'email' => ['email',Rule::unique('users', 'email')->ignore(Auth::user()->id), $requiredRule],
+            'password' => ['string', $requiredRule],
+            'street' =>  ['string', $requiredRule],
+            'number' =>  ['string', $requiredRule],
+            'neighborhood' =>  ['string', $requiredRule],
+            'city' =>  ['string', $requiredRule],
+            'cep' =>  ['string','formato_cep', $requiredRule],
+            'state' =>  ['string', $requiredRule],
         ];
     }
 
