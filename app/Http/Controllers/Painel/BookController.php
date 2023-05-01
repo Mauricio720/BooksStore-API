@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Painel;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Http\Controllers\Controller;
 
 class BookController extends Controller
 {

@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Painel\BookController;
+use App\Http\Controllers\Painel\UserController;
+use App\Http\Controllers\Painel\HomeController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::any('/addBook', [App\Http\Controllers\BookController::class, 'add'])->name('addBook');
-Route::any('/editBook/{id}', [App\Http\Controllers\BookController::class, 'edit'])->name('editBook');
-Route::get('/deleteBook/{id}', [App\Http\Controllers\BookController::class, 'delete'])->name('deleteBook');
-Route::get('/my_profile', [App\Http\Controllers\UserController::class, 'myProfile'])->name('myProfile');
-Route::post('/update_user', [App\Http\Controllers\UserController::class, 'updateUser'])->name('updateUser');
-
-Route::get('/foo', function () {
-    Artisan::call('storage:link');
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::any('/addBook', [BookController::class, 'add'])->name('addBook');
+Route::any('/editBook/{id}', [BookController::class, 'edit'])->name('editBook');
+Route::get('/deleteBook/{id}', [BookController::class, 'delete'])->name('deleteBook');
+Route::get('/my_profile', [UserController::class, 'myProfile'])->name('myProfile');
+Route::post('/update_user', [UserController::class, 'updateUser'])->name('updateUser');

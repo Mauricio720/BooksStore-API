@@ -101,7 +101,7 @@
         "/user": {
             "put": {
                 "tags": [
-                    "USUÁRIOS"
+                    "Usuários"
                 ],
                 "summary": "ATUALIZAÇÃO USUÁRIO",
                 "description": "Rota para atualizar do usuário",

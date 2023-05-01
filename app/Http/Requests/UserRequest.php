@@ -147,13 +147,15 @@ class UserRequest extends FormRequest
     {
         $verboHttp = $this->getMethod();
         $requiredRule='required';
+        $ruleUniqueEmail='unique:users';
         if ($verboHttp == 'PUT') {
             $requiredRule="";
+            $ruleUniqueEmail=Rule::unique('users', 'email')->ignore(Auth::user()->id);
         }
      
         return [
             'name'=>['string'],
-            'email' => ['email',Rule::unique('users', 'email')->ignore(Auth::user()->id), $requiredRule],
+            'email' => ['email',$ruleUniqueEmail,$requiredRule],
             'password' => ['string', $requiredRule],
             'street' =>  ['string', $requiredRule],
             'number' =>  ['string', $requiredRule],
