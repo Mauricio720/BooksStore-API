@@ -19,32 +19,141 @@
         }
     ],
     "paths": {
+        "/logged": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "USUARIO LOGADO",
+                "description": "Rota para trazer usuário logado",
+                "operationId": "a9ade1f6ef02f859bad1f6c2af2dc906",
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Autenticação"
                 ],
                 "summary": "LOGIN",
-                "description": "Rota para realização de login \n     *      (Login de teste email:alexane94@example.com; senha:password)",
+                "description": "Rota para realização de login",
                 "operationId": "67d6d0fdd54fba132e1b6f55ca254183",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "Email para login",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
                         }
                     },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "Senha para login",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "REGISTRO USUÁRIO",
+                "description": "Rota para registro do usuário",
+                "operationId": "5d4fa5d5607ed675ba93907e1fc94534",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegisterRequest"
+                            }
                         }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/books": {
+            "get": {
+                "tags": [
+                    "Livros"
+                ],
+                "summary": "LIVROS",
+                "description": "Rota para trazer e filtrar os livros",
+                "operationId": "fa6c6e494bccc965aebc1341473935f1",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Buscar por nome,descrição ou nome do autor do livro",
+                        "required": false
                     }
                 ],
                 "responses": {
@@ -73,6 +182,103 @@
         }
     },
     "components": {
+        "schemas": {
+            "AuthRequest": {
+                "title": "Auth Request",
+                "description": "Auth request body data",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "Email do login",
+                        "type": "string",
+                        "example": "teste@hotmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "Senha do login",
+                        "type": "string",
+                        "example": "1234"
+                    }
+                },
+                "type": "object"
+            },
+            "UserRegisterRequest": {
+                "title": "Auth Register Request",
+                "description": "Auth request body data",
+                "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "street",
+                    "number",
+                    "neighborhood",
+                    "city",
+                    "cep",
+                    "state"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Nome do usuário",
+                        "type": "string",
+                        "example": "Pedro Souza"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "Email do usuário",
+                        "type": "string",
+                        "example": "teste@hotmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "Senha do usuário",
+                        "type": "string",
+                        "example": "1234"
+                    },
+                    "cep": {
+                        "title": "cep",
+                        "description": "cep do usuário",
+                        "type": "string",
+                        "example": "05454-457"
+                    },
+                    "street": {
+                        "title": "street",
+                        "description": "Rua do usuário",
+                        "type": "string",
+                        "example": "Principal"
+                    },
+                    "number": {
+                        "title": "number",
+                        "description": "Numero de endereço do usuário",
+                        "type": "string",
+                        "example": "4547"
+                    },
+                    "neighborhood": {
+                        "title": "neighborhood",
+                        "description": "bairro do usuário",
+                        "type": "string",
+                        "example": "Guaianases"
+                    },
+                    "city": {
+                        "title": "city",
+                        "description": "cidade do usuário",
+                        "type": "string",
+                        "example": "São Paulo"
+                    },
+                    "state": {
+                        "title": "state",
+                        "description": "estado do usuário",
+                        "type": "string",
+                        "example": "São Paulo"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "apiAuth": {
                 "type": "http",
