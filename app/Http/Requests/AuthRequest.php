@@ -6,6 +6,15 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
+/**
+ * @OA\Schema(
+ *      title="Auth Request",
+ *      description="Auth request body data",
+ *      type="object",
+ *      required={"email","password"}
+ * )
+ */
+
 class AuthRequest extends FormRequest
 {
     /**
@@ -23,6 +32,29 @@ class AuthRequest extends FormRequest
      *
      * @return array
      */
+
+      /**
+     * @OA\Property(
+     *      title="email",
+     *      description="Email do login",
+     *      example="teste@hotmail.com"
+     * )
+     *
+     * @var string
+     */
+    public $email;
+
+       /**
+     * @OA\Property(
+     *      title="password",
+     *      description="Senha do login",
+     *      example="1234"
+     * )
+     *
+     * @var string
+     */
+    public $password;
+
     public function rules()
     {
         return [

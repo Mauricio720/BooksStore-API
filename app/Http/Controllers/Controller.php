@@ -10,8 +10,8 @@ use Illuminate\Routing\Controller as BaseController;
    /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="Origem API",
-     *      description="Rotas da API do Sistema Origem.",
+     *      title="Api Books",
+     *      description="Rotas da API de Livros.",
      *      @OA\Contact(
      *          email="admin@admin.com"
      *      ),
