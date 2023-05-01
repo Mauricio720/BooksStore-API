@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/books', [App\Http\Controllers\Api\BookController::class, 'list']);
+Route::get('/books/{search?}', [App\Http\Controllers\Api\BookController::class, 'list']);
 Route::controller(AuthController::class)->group(function () {
+  Route::post('logged', 'logged');
   Route::post('login', 'login');
   Route::post('register', 'register');
   Route::post('logout', 'logout');
