@@ -14,6 +14,28 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function usersSite(Request $request){
+        $users=User::where('type',1)->get();
+        $search='';
+        if($request->filled('search')){
+            $search=$request->input('search');
+            $users=User::where('type',1)
+                ->where('name','LIKE','%'.$search.'%')
+                ->orwhere('email','LIKE','%'.$search.'%')
+                ->get();
+        }
+        
+        return view('users',['users'=>$users,'search'=>$search]);
+    }
+
+    public function blockUnlock($id){
+        $user=User::where('id',$id)->first();
+        $user->block=$user->block===0?1:0;
+        $user->save();
+
+        return redirect()->route('users');
+    }
+
     public function myProfile(){
         return view('myProfile');
     }
