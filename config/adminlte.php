@@ -296,12 +296,23 @@ return [
             'icon' => 'fas fa-fw fa-book',
         ],
 
-       [
+        [
             'text' => 'Perfil',
             'url'  => 'my_profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-       
+        
+        [
+            'text' => 'Pedidos',
+            'url'  => 'orders',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+
+        [
+            'text' => 'Clientes',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*
