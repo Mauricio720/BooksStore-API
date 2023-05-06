@@ -224,6 +224,102 @@
                     }
                 }
             }
+        },
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "ORDERS",
+                "description": "Rota para trazer e filtrar os pedidos",
+                "operationId": "f2ed02d05432496b7f9754441e208e66",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Buscar por data (Formato Y-m-d)",
+                        "required": false
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Buscar por status (pendent,complete,cancel)",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "REGISTRO DO PEDIDO",
+                "description": "Rota para registro do pedido",
+                "operationId": "faf8f1ab3266846b03c01ffae9b09147",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -247,6 +343,62 @@
                         "description": "Senha do login",
                         "type": "string",
                         "example": "1234"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderRequest": {
+                "title": "Auth Register Request",
+                "description": "order request body data",
+                "required": [
+                    "total",
+                    "orders_items"
+                ],
+                "properties": {
+                    "total": {
+                        "title": "total",
+                        "description": "Total do pedido",
+                        "type": "number",
+                        "format": "float",
+                        "example": "21.98"
+                    },
+                    "orders_items": {
+                        "title": "order_items",
+                        "description": "Items do pedido",
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "id_book",
+                                "quantity",
+                                "unit_price",
+                                "total_price"
+                            ],
+                            "properties": {
+                                "id_book": {
+                                    "description": "ID do livro",
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "quantity": {
+                                    "description": "Quantidade do livro",
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "unit_price": {
+                                    "description": "Preço unitário do livro",
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 10.99
+                                },
+                                "total_price": {
+                                    "description": "Preço total do livro",
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 21.98
+                                }
+                            },
+                            "type": "object"
+                        }
                     }
                 },
                 "type": "object"
