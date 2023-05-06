@@ -106,6 +106,12 @@ class AuthController extends Controller
         }
 
         $user = Auth::guard('api')->user();
+        if($user->block){
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Usuário Bloqueado',
+            ],400);
+        }
         return response()->json([
             'status' => 'success',
             'user' => $user,
@@ -176,7 +182,7 @@ class AuthController extends Controller
             'status' => 'success',
             'user' => Auth::guard('api')->user()->load('address'),
             'token' => $token,
-        ]);
+        ],201);
     }
 
     public function logout()
