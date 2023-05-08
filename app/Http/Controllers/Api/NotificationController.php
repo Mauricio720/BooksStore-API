@@ -32,6 +32,8 @@ class NotificationController extends Controller
             $order=Order::where('external_reference',$externalReference)->first();
             $order->status='success';
             $order->save();
+
+            
         }
     }
 }
