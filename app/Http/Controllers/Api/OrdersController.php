@@ -152,7 +152,6 @@ class OrdersController extends Controller
      */
     public function add(OrderRequest $request){
         $user=Auth::guard('api')->user()->load('address');
-        $mercadoPago=new MercadoPagoPayment(env('TOKEN_PAYMENT'));
         
         $payer=new Payer();
         $payer->setName($user['name']);
@@ -194,6 +193,10 @@ class OrdersController extends Controller
             'order_items.orders_id'
         ]);
 
+        $mercadoPago=new MercadoPagoPayment(env('TOKEN_PAYMENT'));
+        $mercadoPago->setPayerInfo($payer);
+        $mercadoPago->setExternalReference(md5(time().rand(0,99999)));
+
         foreach ($ordersItems as $orderItem) {
             $item=new ItemPayment();
             $item->setTitle($orderItem['title']);
@@ -203,11 +206,10 @@ class OrdersController extends Controller
             $mercadoPago->setPaymentItem($item);
         }
         
-        $mercadoPago->setPayerInfo($payer);
-        $mercadoPago->setExternalReference(md5(time().rand(0,99999)));
         
         $payment=new Payment($mercadoPago);
         $order->link_payment=$payment->doPayment();
+        $order->external_reference=$mercadoPago->getExternalReference();
         $order->save();
 
         return response()->json([

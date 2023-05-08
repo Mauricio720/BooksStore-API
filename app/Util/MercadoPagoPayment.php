@@ -48,7 +48,7 @@ class MercadoPagoPayment implements PaymentInter{
         return $this->paymentItens;
     }
     
-    public function setPaymentItem($paymentItem){
+    public function setPaymentItem(ItemPayment $paymentItem){
         $this->paymentItens[]=$paymentItem;
     }
     
@@ -56,8 +56,8 @@ class MercadoPagoPayment implements PaymentInter{
         $preference=new MPPreference();
         $preference->external_reference=$this->getExternalReference();
         $paymentsItens=$this->getPaymentItens();
-        
-        if(count($paymentsItens)<2){
+ 
+        if(count($paymentsItens)==1){
             $paymentItem=$paymentsItens[0];
            
             $item = new MPItem();
@@ -66,12 +66,15 @@ class MercadoPagoPayment implements PaymentInter{
             $item->unit_price =$paymentItem->getUnitPrice();
             $preference->items = array($item);
         }else{
-            foreach ($paymentsItens as $key => $item) {
+            $items=[];
+            foreach ($paymentsItens as $key => $paymentItem) {
                 $item = new MPItem();
-                $item->title = $this->item->getTitle();
-                $item->quantity = $this->item->getQuantity();
-                $item->unit_price = $this->item->getUnitPrice();
+                $item->title = $paymentItem->getTitle();
+                $item->quantity = $paymentItem->getQuantity();
+                $item->unit_price = $paymentItem->getUnitPrice();
+                $items[]=$item; 
             }
+            $preference->items = $items;
         }
 
         if($this->getPayerInfo() != ""){
