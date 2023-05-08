@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Util\ItemPayment;
+use App\Util\MercadoPagoPayment;
+use App\Util\Payer;
+use App\Util\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -147,11 +151,20 @@ class OrdersController extends Controller
      * )
      */
     public function add(OrderRequest $request){
+        $user=Auth::guard('api')->user()->load('address');
+        $mercadoPago=new MercadoPagoPayment(env('TOKEN_PAYMENT'));
+        
+        $payer=new Payer();
+        $payer->setName($user['name']);
+        $payer->setEmail($user['email']);
+        $payer->setStreet($user['address']->street);
+        $payer->setNumber($user['address']->number);
+        $payer->setCep($user['address']->cep);
+
         $order=new Order();
         $order->subtotal=$request->input('total');
         $order->total=$request->input('total');
         $order->status='pendent';
-        $order->link_payment="/";
         $order->users_id=Auth::guard('api')->user()->id;
         $order->save();
 
@@ -168,18 +181,34 @@ class OrdersController extends Controller
         }
 
         $ordersItems=OrderItem::where('orders_id',$order->id)
-            ->join('books','order_items.books_id','books.id')
-            ->get([
-                'order_items.id',
-                'books.title',
-                'books.description',
-                'books.img',
-                'books.author',
-                'order_items.quantity',
-                'order_items.unit_price',
-                'order_items.total_price',
-                'order_items.orders_id'
-            ]);
+        ->join('books','order_items.books_id','books.id')
+        ->get([
+            'order_items.id',
+            'books.title',
+            'books.description',
+            'books.img',
+            'books.author',
+            'order_items.quantity',
+            'order_items.unit_price',
+            'order_items.total_price',
+            'order_items.orders_id'
+        ]);
+
+        foreach ($ordersItems as $orderItem) {
+            $item=new ItemPayment();
+            $item->setTitle($orderItem['title']);
+            $item->setDescription($orderItem['description']);
+            $item->setUnitPrice($orderItem['unit_price']);
+            $item->setQuantity($orderItem['quantity']);
+            $mercadoPago->setPaymentItem($item);
+        }
+        
+        $mercadoPago->setPayerInfo($payer);
+        $mercadoPago->setExternalReference(md5(time().rand(0,99999)));
+        
+        $payment=new Payment($mercadoPago);
+        $order->link_payment=$payment->doPayment();
+        $order->save();
 
         return response()->json([
             'status' => 'success',
