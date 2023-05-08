@@ -291,7 +291,7 @@ return [
 
     'menu' => [
         [
-            'text' => 'Inicio',
+            'text' => 'Livros',
             'url'  => '/home',
             'icon' => 'fas fa-fw fa-book',
         ],
@@ -305,13 +305,13 @@ return [
         [
             'text' => 'Pedidos',
             'url'  => 'orders',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-dollar-sign',
         ],
 
         [
             'text' => 'Clientes',
             'url'  => 'users',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-users',
         ],
     ],
 

@@ -2,8 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="card-header w-100 d-flex justify-content-end">
-            <a href="{{ route('addBook') }}" class="btn btn-dark">Adicionar Livro</a>
+        <div class="card-header w-100 ">
+            <div class=" w-100 d-flex justify-content-between">
+                <h4>Livros</h4>
+                <a href="{{ route('addBook') }}" class="btn btn-dark">Adicionar Livro</a>
+            </div>
         </div>
         @foreach ($books as $book)
             <div href="{{ route('editBook', ['id' => $book->id]) }}" class="card m-4">
