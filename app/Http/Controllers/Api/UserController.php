@@ -53,9 +53,8 @@ class UserController extends Controller
      */
     
     public function update(UserRequest $request){
-        $user=User::where('id',Auth::guard('api')->user()->id)->first();
-        $data=$request->only(['name','email','password']);
-        
+        $user=User::where('id',Auth::guard('api')->user()->id)->with('address')->first();
+     
         $user->name=$request->filled('name')?$request->input('name'):$user->name;
         $user->email=$request->filled('email')?$request->input('email'):$user->email;
         $user->password=$request->filled('password')
@@ -76,7 +75,7 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user()->load('address'),
+            'user' => $user,
         ]);
     }
 }
