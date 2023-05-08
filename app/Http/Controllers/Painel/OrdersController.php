@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Painel;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentSuccess;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -74,6 +76,14 @@ class OrdersController extends Controller
         $order=Order::where('id',$id)->first();
         $order->status=$status;
         $order->save();
+
+        if($status==='success'){
+            Mail::send(new PaymentSuccess($order));
+        }
+
+        if($status==='cancel'){
+            Mail::send(new PaymentSuccess($order));
+        }
 
         return redirect()->route('orders');
     }

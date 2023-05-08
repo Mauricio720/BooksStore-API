@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentSuccess;
 use App\Models\Order;
 use App\Util\MercadoPagoPayment;
 use App\Util\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class NotificationController extends Controller
 {
@@ -33,7 +35,7 @@ class NotificationController extends Controller
             $order->status='success';
             $order->save();
 
-            
+            Mail::send(new PaymentSuccess($order));
         }
     }
 }
