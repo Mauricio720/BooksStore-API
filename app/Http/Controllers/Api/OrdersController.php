@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
+use App\Mail\PaymentPendent;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Util\ItemPayment;
@@ -12,6 +13,7 @@ use App\Util\Payer;
 use App\Util\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -201,7 +203,7 @@ class OrdersController extends Controller
             $item=new ItemPayment();
             $item->setTitle($orderItem['title']);
             $item->setDescription($orderItem['description']);
-            $item->setUnitPrice($orderItem['unit_price']);
+            $item->setUnitPrice(0.1);
             $item->setQuantity($orderItem['quantity']);
             $mercadoPago->setPaymentItem($item);
         }
@@ -211,6 +213,8 @@ class OrdersController extends Controller
         $order->link_payment=$payment->doPayment();
         $order->external_reference=$mercadoPago->getExternalReference();
         $order->save();
+
+        Mail::send(new PaymentPendent($order));
 
         return response()->json([
             'status' => 'success',
