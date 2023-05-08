@@ -25,8 +25,8 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
+Route::get('/orders/detail/{id}', [OrdersController::class, 'seeDetail'])->name('orderDetail');
 Route::get('/orders/changeStatus/{id}/{status}', [OrdersController::class, 'changeStatus'])->name('changeStatus');
-
 
 Route::any('/addBook', [BookController::class, 'add'])->name('addBook');
 Route::any('/editBook/{id}', [BookController::class, 'edit'])->name('editBook');
