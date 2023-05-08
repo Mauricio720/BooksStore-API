@@ -203,11 +203,10 @@ class OrdersController extends Controller
             $item=new ItemPayment();
             $item->setTitle($orderItem['title']);
             $item->setDescription($orderItem['description']);
-            $item->setUnitPrice(0.1);
+            $item->setUnitPrice($orderItem['unit_price']);
             $item->setQuantity($orderItem['quantity']);
             $mercadoPago->setPaymentItem($item);
         }
-        
         
         $payment=new Payment($mercadoPago);
         $order->link_payment=$payment->doPayment();

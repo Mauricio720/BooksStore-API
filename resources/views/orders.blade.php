@@ -58,7 +58,8 @@
                                 {{ $order->email }}
                             </td>
                             <td>
-                                <a class="btn btn-primary" href="http://">Ver Detalhes</a>
+                                <a class="btn btn-primary" href="{{ route('orderDetail', ['id' => $order->id]) }}">Ver
+                                    Detalhes</a>
                                 @if ($order->status != 'cancel')
                                     <a class="btn btn-danger"
                                         href="{{ route('changeStatus', [

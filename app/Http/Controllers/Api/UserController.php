@@ -67,7 +67,7 @@ class UserController extends Controller
         $address=Address::where('users_id',$user->id)->first();
         $address->street=$request->filled('street')?$request->input('street'):$address->street;
         $address->number=$request->filled('number')?$request->input('number'):$address->number;
-        $address->neighborhood=$request->filled('number')?$request->input('number'):$address->number;
+        $address->neighborhood=$request->filled('number')?$request->input('neighborhood'):$address->neighborhood;
         $address->city=$request->filled('city')?$request->input('city'):$address->city;
         $address->cep=$request->filled('cep')?$request->input('cep'):$address->city;
         $address->state=$request->filled('state')?$request->input('state'):$address->state;

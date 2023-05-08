@@ -33,6 +33,7 @@ class NotificationController extends Controller
         if($status=='approved'){
             $order=Order::where('external_reference',$externalReference)->first();
             $order->status='success';
+            $order->link_payment='';
             $order->save();
 
             Mail::send(new PaymentSuccess($order));
