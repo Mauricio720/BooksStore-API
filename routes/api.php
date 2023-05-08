@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\OrdersController;
 use App\Http\Controllers\Api\UserController;
@@ -36,3 +37,5 @@ Route::controller(OrdersController::class)->group(function () {
   Route::get('orders', 'list');
   Route::post('orders/cancel/{id}', 'cancel');
 });
+
+Route::post('/notification',[NotificationController::class,'notificationMercadoPago']);
