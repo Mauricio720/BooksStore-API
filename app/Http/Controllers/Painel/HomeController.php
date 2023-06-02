@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $array=[];
-        $array['books']=Book::all();
+        $array['books']=Book::orderBy('id','DESC')->get();
 
         return view('home',$array);
     }

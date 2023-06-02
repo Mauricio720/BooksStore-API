@@ -20,7 +20,7 @@
                 </a>
                 <div class="book">
                     <div class="bookImage__exibition">
-                        <img src="{{ $book->img }}" width="100%" alt="">
+                        <img src="{{ $book->img ? $book->img : asset('/images/book.png') }}" width="100%" alt="">
                     </div>
                     <div class="bookTitle">{{ $book->title }}</div>
                     <div class="bookAuthor">autor: {{ $book->author }}</div>
