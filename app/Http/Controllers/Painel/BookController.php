@@ -19,7 +19,7 @@ class BookController extends Controller
             $book=new Book();
             $book->title=$request->input('title');
             $book->description=$request->input('description');
-            $book->price="R$ ".str_replace('.',',',number_format($request->input('price'),2));
+            $book->price=$request->input('price');
             $book->author=$request->input('author');
             $book->img=$filePath;
             $book->save();
@@ -42,7 +42,7 @@ class BookController extends Controller
             
             $book->title=$request->input('title');
             $book->description=$request->input('description');
-            $book->price="R$ ".str_replace('.',',',number_format($request->input('price'),2));
+            $book->price=$request->input('price');
             $book->author=$request->input('author');
             $book->img=$filePath;
             $book->save();
