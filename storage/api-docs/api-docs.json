@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://apibooks.mauridesenvolvedor.com/",
+            "url": "http://apibooks.mauridesenvolvedor.com/api/",
             "description": "Demo API Server"
         }
     ],

@@ -22,7 +22,7 @@ use Illuminate\Routing\Controller as BaseController;
      * )
      *
      * @OA\Server(
-     *      url="http://apibooks.mauridesenvolvedor.com/",
+     *      url="http://apibooks.mauridesenvolvedor.com/api/",
      *      description="Demo API Server"
      * ),
      * 
