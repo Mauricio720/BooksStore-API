@@ -21,7 +21,9 @@
     "paths": {
         "/logged": {
             "post": {
-                "tags": ["Autenticação"],
+                "tags": [
+                    "Autenticação"
+                ],
                 "summary": "USUARIO LOGADO",
                 "description": "Rota para trazer usuário logado",
                 "operationId": "a9ade1f6ef02f859bad1f6c2af2dc906",
@@ -56,7 +58,9 @@
         },
         "/login": {
             "post": {
-                "tags": ["Autenticação"],
+                "tags": [
+                    "Autenticação"
+                ],
                 "summary": "LOGIN",
                 "description": "Rota para realização de login",
                 "operationId": "67d6d0fdd54fba132e1b6f55ca254183",
@@ -96,7 +100,9 @@
         },
         "/user": {
             "put": {
-                "tags": ["Usuários"],
+                "tags": [
+                    "Usuários"
+                ],
                 "summary": "ATUALIZAÇÃO USUÁRIO",
                 "description": "Rota para atualizar do usuário",
                 "operationId": "6069c00eaab3a7ff0c44e75d385cc2f1",
@@ -139,7 +145,9 @@
                 ]
             },
             "post": {
-                "tags": ["Autenticação"],
+                "tags": [
+                    "Autenticação"
+                ],
                 "summary": "REGISTRO USUÁRIO",
                 "description": "Rota para registro do usuário",
                 "operationId": "88f8ef1c72fbda4344f742bd01a197a8",
@@ -179,7 +187,9 @@
         },
         "/books": {
             "get": {
-                "tags": ["Livros"],
+                "tags": [
+                    "Livros"
+                ],
                 "summary": "LIVROS",
                 "description": "Rota para trazer e filtrar os livros",
                 "operationId": "fa6c6e494bccc965aebc1341473935f1",
@@ -217,7 +227,9 @@
         },
         "/orders": {
             "get": {
-                "tags": ["Pedidos"],
+                "tags": [
+                    "Pedidos"
+                ],
                 "summary": "ORDERS",
                 "description": "Rota para trazer e filtrar os pedidos",
                 "operationId": "f2ed02d05432496b7f9754441e208e66",
@@ -264,7 +276,9 @@
                 ]
             },
             "post": {
-                "tags": ["Pedidos"],
+                "tags": [
+                    "Pedidos"
+                ],
                 "summary": "REGISTRO DO PEDIDO",
                 "description": "Rota para registro do pedido",
                 "operationId": "faf8f1ab3266846b03c01ffae9b09147",
@@ -313,7 +327,10 @@
             "AuthRequest": {
                 "title": "Auth Request",
                 "description": "Auth request body data",
-                "required": ["email", "password"],
+                "required": [
+                    "email",
+                    "password"
+                ],
                 "properties": {
                     "email": {
                         "title": "email",
@@ -333,7 +350,10 @@
             "OrderRequest": {
                 "title": "Auth Register Request",
                 "description": "order request body data",
-                "required": ["total", "orders_items"],
+                "required": [
+                    "total",
+                    "orders_items"
+                ],
                 "properties": {
                     "total": {
                         "title": "total",
